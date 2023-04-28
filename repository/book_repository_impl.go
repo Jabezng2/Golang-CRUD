@@ -22,7 +22,7 @@ func (b *BookRepositoryImpl) Delete(ctx context.Context, bookId int) {
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	SQL := "delete from book where id =$1"
+	SQL := "DELETE FROM book WHERE id =$1"
 	_, errExec := tx.ExecContext(ctx, SQL, bookId)
 	helper.PanicIfError(errExec)
 }
@@ -33,7 +33,7 @@ func (b *BookRepositoryImpl) FindAll(ctx context.Context) []model.Book {
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	SQL := "select id,name from book"
+	SQL := "SELECT id, name FROM book"
 	result, errQuery := tx.QueryContext(ctx, SQL)
 	helper.PanicIfError(errQuery)
 	defer result.Close()
@@ -57,7 +57,7 @@ func (b *BookRepositoryImpl) FindById(ctx context.Context, bookId int) (model.Bo
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	SQL := "select id,name from book where id=$1"
+	SQL := "SELECT id, name FROM book WHERE id=$1"
 	result, errQuery := tx.QueryContext(ctx, SQL, bookId)
 	helper.PanicIfError(errQuery)
 	defer result.Close()
@@ -79,7 +79,7 @@ func (b *BookRepositoryImpl) Save(ctx context.Context, book model.Book) {
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	SQL := "insert into book(name) values ($1)"
+	SQL := "INSERT INTO book(name) VALUES ($1)"
 	_, err = tx.ExecContext(ctx, SQL, book.Name)
 	helper.PanicIfError(err)
 }
@@ -90,7 +90,7 @@ func (b *BookRepositoryImpl) Update(ctx context.Context, book model.Book) {
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	SQL := "update book set name=$1 where id=$2"
+	SQL := "UPDATE book SET name=$1 WHERE id=$2"
 	_, err = tx.ExecContext(ctx, SQL, book.Name, book.Id)
 	helper.PanicIfError(err)
 }
