@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"golang_crud/helper"
 
-	_ "github.com/lib/pq" // Postgres golang driver
+	_ "github.com/lib/pq" // Postgres goalng driver
 	"github.com/rs/zerolog/log"
 )
 
@@ -26,7 +26,7 @@ func DatabaseConnection() *sql.DB {
 	err = db.Ping()
 	helper.PanicIfError(err)
 
-	log.Info().Msg("Connected to Database!!")
+	log.Info().Msg("Connected to database!!")
 
 	return db
 }
